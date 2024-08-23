@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,9 +14,22 @@ namespace Sam_Lib
 {
     public partial class Form1 : Form
     {
+   
 
-         static cardReader cReader = new cardReader();
 
+
+
+
+
+
+
+
+
+
+
+
+        static cardReader cReader   = new cardReader();
+        static tagWorks   tagReader = new tagWorks();
         public Form1()
         {
             InitializeComponent();
@@ -46,6 +61,22 @@ namespace Sam_Lib
 
             };
             label2.Text = cReader.RdrState.RdrName;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (!tagReader.connectReader()) textBox1.Text = " no Tag reader enabled!";
+            else
+            {
+                textBox1.Text = " Tag reader found !\r\n";
+                string[] tmp = tagReader.metaData();
+                for (int i=0;i<3;i++) textBox1.Text += tmp[i] +"\r\n";
+
+            }
+
+
+
+
         }
     }
     
