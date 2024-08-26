@@ -78,6 +78,24 @@ namespace Sam_Lib
 
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (!tagReader.connectReader()) textBox1.Text = " no Tag reader enabled!";
+            else
+            {
+                textBox1.Text = " Tag reader found !\r\n";
+                string[] tmp = tagReader.metaData();
+                for (int i = 0; i < 3; i++) textBox1.Text += tmp[i] + "\r\n";
+
+            }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            textBox1.Text += "\r\n" + tagReader.antiCollSearch(0, "");
+        }
     }
     
 }
